@@ -6,7 +6,8 @@ logging.basicConfig(level=logging.DEBUG)
 
 ITERATIONS = 100
 
-connection = pika.BlockingConnection(pika.URLParameters('amqp://guest:guest@localhost:5672/%2F?heartbeat_interval=1'))
+params = 'amqp://guest:guest@localhost:5672/%2F?heartbeat_interval=1'
+connection = pika.BlockingConnection(pika.URLParameters(params))
 channel = connection.channel()
 
 def closeit():
@@ -15,7 +16,9 @@ def closeit():
 
 connection.add_timeout(5, closeit)
 
-connection.sleep(100)
+#connection.sleep(100)
+
+print 'end..'
 
 """
 channel.confirm_delivery()
